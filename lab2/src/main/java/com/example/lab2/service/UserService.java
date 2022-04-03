@@ -16,10 +16,7 @@ public interface UserService {
 
     List<UserDto> getAll();
 
-
-    List<UserDto> findUserByPostSize(int num);
-
-    List<Post> findPostsByUserId(long id);
+    List<UserDto> findByPostSize(int num);
 
 
 }

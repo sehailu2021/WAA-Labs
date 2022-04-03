@@ -14,15 +14,9 @@ import java.util.List;
 public interface UserRepo extends JpaRepository<User,Long> {
 
 
-    @Query(value = "select * from User u where u.posts.size >= num",nativeQuery = true)
-    List<User> findUserByPostSize(int num);
+    @Query("select u from User u where u.posts.size >=: n")
+    List<User> findByPostSize(int n);
 
-    @Query(value = "select * from User u where u.post.title  = title",nativeQuery = true)
-    List<User> findUserByPostTitle(String title);
-
-
-//  @Query(value = "select * from User u where u.id: id",nativeQuery = true)
-//    List<Post> findPostsByUserId(long id);
 
 
 }

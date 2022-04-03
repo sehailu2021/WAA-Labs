@@ -7,6 +7,8 @@ import com.example.lab2.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentServiceImpl implements CommentService {
     @Autowired
@@ -16,5 +18,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void addComment(Comment c) {
         commentRepo.save(c);
+    }
+
+    @Override
+    public List<Comment> getComments() {
+        return commentRepo.getComments();
     }
 }

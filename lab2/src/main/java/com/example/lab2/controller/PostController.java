@@ -11,38 +11,34 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/posts")
+@RequestMapping("/api/v1/users")
 public class PostController {
+
     @Autowired
     PostService postService;
 
-    @GetMapping
-    public List<Post> getAllPost(){
-        return postService.getAll();
+
+    @GetMapping("/{id}/posts")
+    public List<Post> findById(@PathVariable long id){
+        return postService.findByUserId(id) ;
 
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Post> findPostById(@PathVariable long id){
-        var post = postService.getById(id) ;
-        return ResponseEntity.ok(post);
-    }
-
-    @PostMapping
-    public void savePost(@RequestBody Post p){
-        postService.save(p);
+    @PostMapping("/{id}")
+    public void savePost(@RequestBody Post p, @PathVariable long id){
+        postService.save(p,id);
 
     }
 
-    @PutMapping("/{id}")
-    public void updatePost(@PathVariable long id, @RequestBody Post p){
-        postService.update(id,p);
+    @PutMapping("/{id}/{index}")
+    public void updatePost(@PathVariable long id,@PathVariable int index, @RequestBody Post p){
+        postService.update(id,index,p);
 
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePost(@PathVariable long id){
-        postService.delete(id);
+    @DeleteMapping("/{id}/{pId}")
+    public void deletePost(@PathVariable long id, @PathVariable long pId){
+        postService.delete(id, pId);
 
     }
 

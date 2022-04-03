@@ -8,14 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PostService {
-    void save(Post u);
+    void save(Post u,long id);
 
-    void delete(long id);
+    void delete(long id, long Pid);
 
-    void update(long id, Post p);
+    void update(long id,int index, Post p);
 
-    Post getById(long id);
-
-    List<Post> getAll();
+    List<Post> findByUserId(long id);
 
 }

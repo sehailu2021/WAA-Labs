@@ -32,14 +32,10 @@ public class UserController {
 
     @GetMapping("/posts/{num}")
     public List<UserDto> getUsers( @PathVariable int num){
-       return userService.findUserByPostSize(num);
+       return userService.findByPostSize(num);
     }
 
 
-    @GetMapping("/{id}/posts")
-    public List<Post> getPosts(@PathVariable long id){
-        return userService.findPostsByUserId(id);
-    }
 
     @PostMapping
     public void save(User u){

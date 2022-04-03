@@ -10,11 +10,13 @@ import java.util.List;
 
 @Repository
 public interface PostRepo extends JpaRepository<Post,Long> {
-    //    @Query(value = "select * from Post p  where p.: id",nativeQuery = true)
-//    List<Post> findPostsByUserId(long id);
+//    @Query( "select p from Post p  where p.title =:title")
+//       List<Post> findByUserId(String title);
 
-    @Query(value = "SELECT * FROM Post p WHERE p.title = :title ",nativeQuery = true)
-      List<Post> getPostByTitle(String title);
+//    @Query(value = "SELECT * FROM  post  WHERE title = title ",nativeQuery = true)
+//      List<Post> getPostByTitle(String title);
+
+    List<Post> findByUserId(long id);
 }
 
 
