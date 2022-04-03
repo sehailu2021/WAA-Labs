@@ -1,5 +1,7 @@
 package com.example.lab2.controller;
 
+import com.example.lab2.aspect.annotation.ExecutionTime;
+import com.example.lab2.aspect.annotation.LogMe;
 import com.example.lab2.domain.Post;
 import com.example.lab2.domain.User;
 import com.example.lab2.domain.dto.UserDto;
@@ -23,7 +25,8 @@ public class UserController {
         return userService.getAll();
     }
 
-
+    @LogMe
+    @ExecutionTime
     @GetMapping("/{id}")
     public UserDto getById(@PathVariable long id){
         return userService.getById(id);
