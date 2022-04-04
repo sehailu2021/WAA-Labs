@@ -13,9 +13,9 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-   @GetMapping("/{id}/comments")
-    public List<Comment> getByPostId(@PathVariable long id){
-        return commentService.getByPostId( id);
+   @GetMapping("/{cId}/comments")
+    public List<Comment> getByPostId(@PathVariable long cId){
+        return commentService.getByPostId( cId);
 
     }
 
