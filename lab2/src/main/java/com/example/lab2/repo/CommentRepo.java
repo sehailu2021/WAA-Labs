@@ -12,6 +12,6 @@ import java.util.List;
 public interface CommentRepo extends JpaRepository<Comment, Long> {
 
   @Query( "select c from Comment c where c.post.id =:id")
-    List<Comment> getComments ();
+    List<Comment> getByPostId (long id);
 
 }

@@ -25,9 +25,18 @@ public class PostServiceImpl implements PostService {
         return user.getPosts();
     }
 
+    @Override
+    public List<Post> findByTitle(String title) {
+        return postRepo.findByTitle(title);
+    }
 
     @Override
-    public void save(Post p, long id) {
+    public List<User> findByPostTitle(String title) {
+        return postRepo.findByPostTitle(title);
+    }
+
+    @Override
+    public void save(long id, Post p) {
         var user =userRepo.getById(id);
         user.getPosts().add(p);
         postRepo.save(p);
@@ -42,9 +51,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void update(long id,int index, Post p) {
-        var post = postRepo.findByUserId(id);
-        post.set(index, p);
+    public void update(long id, Post p) {
+        var post = postRepo.getById(id);
+        post.setTitle(p.getTitle());
+        post.setAuthor(p.getAuthor());
+        post.setContent(p.getContent());
+
 
     }
 

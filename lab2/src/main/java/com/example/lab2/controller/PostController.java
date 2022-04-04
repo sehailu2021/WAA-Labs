@@ -1,6 +1,7 @@
 package com.example.lab2.controller;
 
 import com.example.lab2.domain.Post;
+import com.example.lab2.domain.User;
 import com.example.lab2.domain.dto.PostDto;
 import com.example.lab2.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/user")
 public class PostController {
 
     @Autowired
@@ -23,16 +24,22 @@ public class PostController {
         return postService.findByUserId(id) ;
 
     }
-
-    @PostMapping("/{id}")
-    public void savePost(@RequestBody Post p, @PathVariable long id){
-        postService.save(p,id);
+    @GetMapping("/posts/{title}")
+    public List<User> findByPostTitle(@PathVariable String title){
+        return postService.findByPostTitle(title);
 
     }
 
-    @PutMapping("/{id}/{index}")
+
+    @PostMapping("/{id}")
+    public void savePost(@PathVariable long id,@RequestBody Post p ){
+        postService.save(id,p);
+
+    }
+
+    @PutMapping("/{id}")
     public void updatePost(@PathVariable long id,@PathVariable int index, @RequestBody Post p){
-        postService.update(id,index,p);
+        postService.update(id,p);
 
     }
 
