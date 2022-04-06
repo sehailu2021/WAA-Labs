@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getAll() {
+        System.out.println(userRepo.findAll());
         return  (List<UserDto>) listMapperUserToUserDto.mapList(userRepo.findAll(),new UserDto());
     }
 

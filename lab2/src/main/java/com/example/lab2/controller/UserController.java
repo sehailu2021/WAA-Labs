@@ -22,14 +22,16 @@ public class UserController {
     @Autowired
     PostService postService;
 
-
+//    @ExecutionTime
     @GetMapping("/users")
+//    @LogMe
     public List<UserDto> getAllUser(){
+        System.out.println("From Controller");
         return userService.getAll();
     }
 
-    @LogMe
-    @ExecutionTime
+//    @LogMe
+//    @ExecutionTime
     @GetMapping("/users/{id}")
     public UserDto getById(@PathVariable long id){
         return userService.getById(id);

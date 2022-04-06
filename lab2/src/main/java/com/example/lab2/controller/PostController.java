@@ -12,35 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/user")
-public class PostController {
-
-    @Autowired
-    PostService postService;
-
-
-    @GetMapping("/{id}/posts")
-    public List<Post> findById(@PathVariable long id){
-        return postService.findByUserId(id) ;
-
-    }
-    @GetMapping("/posts/{title}")
-    public List<User> findByPostTitle(@PathVariable String title){
-        return postService.findByPostTitle(title);
-
-    }
-
-
-    @PostMapping("/{id}")
-    public void savePost(@PathVariable long id,@RequestBody Post p ){
-        postService.save(id,p);
-
-    }
-
-    @PutMapping("/{id}")
-    public void updatePost(@PathVariable long id,@PathVariable int index, @RequestBody Post p){
-        postService.update(id,p);
-
+@RequestMapping("/api/v1/users 
     }
 
     @DeleteMapping("/{id}/{pId}")

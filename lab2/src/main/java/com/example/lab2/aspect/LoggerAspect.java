@@ -32,9 +32,9 @@ public class LoggerAspect {
         System.out.println("Log AfterThrowing the method:" +joinPoint.getSignature().getName());
     }
 
-    @Around("logMe()")
-    public void logAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        System.out.println("Log Around the method:" +proceedingJoinPoint.getSignature().getName());
-    }
+//    @Around("logMe()")
+//    public void logAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+//        System.out.println("Log Around the method:" +proceedingJoinPoint.getSignature().getName());
+//    }
 
 }
