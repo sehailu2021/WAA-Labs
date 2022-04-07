@@ -1,4 +1,4 @@
-package com.example.lab2.helper;
+package edu.miu.lab5.helper;
 
 
 import org.modelmapper.ModelMapper;

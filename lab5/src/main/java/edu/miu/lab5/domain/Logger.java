@@ -1,4 +1,4 @@
-package com.example.lab2.domain;
+package edu.miu.lab5.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.example.lab2.domain.dto;
+package edu.miu.lab5.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

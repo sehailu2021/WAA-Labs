@@ -1,11 +1,11 @@
-package com.example.lab2.service.impl;
+package edu.miu.lab5.service.impl;
 
-import com.example.lab2.domain.Post;
-import com.example.lab2.domain.dto.PostDto;
-import com.example.lab2.helper.ListMapper;
-import com.example.lab2.repo.PostRepo;
-import com.example.lab2.repo.UserRepo;
-import com.example.lab2.service.PostService;
+import edu.miu.lab5.domain.Post;
+import edu.miu.lab5.domain.dto.PostDto;
+import edu.miu.lab5.helper.ListMapper;
+import edu.miu.lab5.repo.AppUserRepo;
+import edu.miu.lab5.repo.PostRepo;
+import edu.miu.lab5.service.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class PostServiceImpl implements PostService {
     PostRepo postRepo;
 
     @Autowired
-    UserRepo userRepo;
+    AppUserRepo userRepo;
 
     @Autowired
     ModelMapper modelMapper;
@@ -48,6 +48,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDto findById(long id) {
         return modelMapper.map(postRepo.getById(id),PostDto.class);
+    }
+
+    @Override
+    public List<PostDto> findAll() {
+        return (List<PostDto>) listMapperPostToPostDto.mapList(postRepo.findAll(),new PostDto());
     }
 
 

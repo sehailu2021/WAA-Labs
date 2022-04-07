@@ -1,14 +1,18 @@
-package com.example.lab2.service;
+package edu.miu.lab5.service;
 
-import com.example.lab2.domain.Comment;
+import edu.miu.lab5.domain.Comment;
 
 import java.util.List;
 
 public interface CommentService {
+    List<Comment> findAll();
 
-    void addComment(long id,Comment c);
+    Comment findById(long id);
+
+    void addComment(long id, Comment c);
 
     List<Comment> getByPostId(long id);
+//    Comment getCommentById(long pId,long id);
 
-    List<Comment> getComments ();
+    List<Comment> getAllComments ();
 }

@@ -1,34 +1,50 @@
-package com.example.lab2.service.impl;
+package edu.miu.lab5.service.impl;
 
-import com.example.lab2.domain.Post;
-import com.example.lab2.domain.User;
-import com.example.lab2.domain.dto.PostDto;
-import com.example.lab2.domain.dto.UserDto;
-import com.example.lab2.helper.ListMapper;
-import com.example.lab2.repo.UserRepo;
-import com.example.lab2.service.UserService;
+import edu.miu.lab5.domain.AppUser;
+import edu.miu.lab5.domain.Role;
+import edu.miu.lab5.domain.dto.UserDto;
+import edu.miu.lab5.helper.ListMapper;
+import edu.miu.lab5.repo.AppUserRepo;
+import edu.miu.lab5.repo.RoleRepo;
+import edu.miu.lab5.service.AppUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class AppUserServiceImpl implements AppUserService {
     @Autowired
     ModelMapper modelMapper;
 
     @Autowired
-    ListMapper<User, UserDto> listMapperUserToUserDto;
+    ListMapper<AppUser, UserDto> listMapperUserToUserDto;
 
     @Autowired
-    private UserRepo userRepo;
+    AppUserRepo userRepo;
+
+    @Autowired
+    RoleRepo roleRepo;
 
 
     @Override
-    public void save(User u) {
-        userRepo.save(u);
+    public void saveUser(AppUser u) {
+
+     userRepo.save(u);
+    }
+
+    @Override
+    public void saveRole(Role r) {
+       roleRepo.save(r);
+
+    }
+
+    @Override
+    public void addRoleToUser(String userName, String roleName) {
+      AppUser user = userRepo.findByUserName(userName);
+      Role role = roleRepo.findByName(roleName);
+      user.getRoles().add(role);
     }
 
     @Override

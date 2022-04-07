@@ -5,18 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Comment {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
-    String name;
-    @ManyToOne
-    @JoinColumn(name="id_post")
-    Post post;
+    private long id;
+
+    @ManyToMany(mappedBy = "roles")
+    List<AppUser> users;
 
 }

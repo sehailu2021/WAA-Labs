@@ -1,8 +1,9 @@
-package com.example.lab2.controller;
-import com.example.lab2.domain.User;
-import com.example.lab2.domain.dto.UserDto;
-import com.example.lab2.service.PostService;
-import com.example.lab2.service.UserService;
+package edu.miu.lab5.controller;
+
+import edu.miu.lab5.domain.User;
+import edu.miu.lab5.domain.dto.UserDto;
+import edu.miu.lab5.service.PostService;
+import edu.miu.lab5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,15 +31,6 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @GetMapping("/posts/{num}")
-    public List<UserDto> getUsers( @PathVariable int num){
-       return userService.findByPostSize(num);
-    }
-
-    @GetMapping("/{id}/posts/{title}")
-    public List<UserDto> getUsersByPostTitle( @PathVariable String title){
-        return userService.findByPostTitle(title);
-    }
 
     @PostMapping
     public void save(User u){
@@ -49,4 +41,15 @@ public class UserController {
     public void delete(long id){
         userService.delete(id);
     }
+
+    @GetMapping("/posts/{num}")
+    public List<UserDto> getUsers( @PathVariable int num){
+       return userService.findByPostSize(num);
+    }
+
+    @GetMapping("/{id}/posts/{title}")
+    public List<UserDto> getUsersByPostTitle( @PathVariable String title){
+        return userService.findByPostTitle(title);
+    }
+
 }

@@ -1,37 +1,38 @@
-package com.example.lab2.controller;
+package edu.miu.lab5.controller;
 
-import com.example.lab2.domain.Comment;
-import com.example.lab2.domain.Post;
-import com.example.lab2.domain.dto.PostDto;
-import com.example.lab2.service.CommentService;
-import com.example.lab2.service.PostService;
-import com.example.lab2.service.UserService;
+import edu.miu.lab5.domain.Comment;
+import edu.miu.lab5.domain.Post;
+import edu.miu.lab5.domain.dto.PostDto;
+import edu.miu.lab5.service.CommentService;
+import edu.miu.lab5.service.PostService;
+import edu.miu.lab5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users/{id}/posts")
+@RequestMapping("/api/v1/posts")
 public class PostController {
     @Autowired
-     PostService postService;
+    PostService postService;
     @Autowired
     UserService userService;
 
     @Autowired
     CommentService commentService;
 
+//    @GetMapping
+//    public List<PostDto> getAll(){
+//        return postService.findAll();
+//
+//    }
 
-    @GetMapping
-    public List<PostDto> getPostByUserId(@PathVariable long id){
-        return postService.findByUserId(id);
-    }
-    @GetMapping("/{pId}")
-    public PostDto getPostById(@PathVariable long id, @PathVariable long pId){
-        return postService.findByUserIdAndPostId(id,pId);
-    }
+    @GetMapping("/{id}")
+    public PostDto getById(@PathVariable long id){
+        return postService.findById(id);
 
+    }
 
 //    @GetMapping("/{title}")
 //    public List<PostDto> findByTitle(@PathVariable String title){
@@ -39,26 +40,38 @@ public class PostController {
 //
 //    }
 
-    @PostMapping
-    public void savePost( long id,@RequestBody Post post){
-        postService.save(id,post);
+//    @PostMapping
+//    public void savePost( long id,@RequestBody Post post){
+//        postService.save(id,post);
+//    }
+//
+//    @PutMapping("/{pId}")
+//    public void updatePost(@PathVariable long pId, @RequestBody Post post){
+//        postService.update(pId,post);
+//    }
+//
+//    @DeleteMapping("/{pId}")
+//    public void deletePost(@PathVariable long id, @PathVariable long pId){
+//        postService.delete(id,pId);
+//    }
+
+    @GetMapping("{id}/comments")
+    public List<Comment> getAll(@PathVariable long id){
+        return commentService.getAllComments();
+
     }
 
-    @PutMapping("/{pId}")
-    public void updatePost(@PathVariable long pId, @RequestBody Post post){
-        postService.update(pId,post);
-    }
+//    @GetMapping("{id}/comments/{cId}")
+//    public Comment getCommentById(@PathVariable long id,@PathVariable long cId){
+//        return commentService.getCommentById(id,cId);
+//
+//    }
 
-    @DeleteMapping("/{pId}")
-    public void deletePost(@PathVariable long id, @PathVariable long pId){
-        postService.delete(id,pId);
-    }
-
-    @GetMapping("/{cId}/comments")
-    public List<Comment> getByPostId(@PathVariable long cId){
-        return commentService.getByPostId( cId);
-
-    }
+//    @GetMapping("/comments/{cId}")
+//    public List<Comment> getByPostId(@PathVariable long cId){
+//        return commentService.getByPostId( cId);
+//
+//    }
 
     @PostMapping("/comments")
     public void save(long id,Comment comment){

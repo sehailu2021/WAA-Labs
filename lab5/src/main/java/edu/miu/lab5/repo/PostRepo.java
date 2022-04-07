@@ -1,6 +1,7 @@
-package com.example.lab2.repo;
+package edu.miu.lab5.repo;
 
-import com.example.lab2.domain.Post;
+
+import edu.miu.lab5.domain.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
