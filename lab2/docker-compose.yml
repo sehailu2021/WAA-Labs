@@ -1,7 +1,7 @@
 services:
 
   postgres:
-    container_name: postgres-lab-Two
+    container_name: postgres-waa-labs
     image: postgres
     environment:
       POSTGRES_USER: postgres

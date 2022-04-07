@@ -1,9 +1,9 @@
 spring:
   application:
-    name: lab
+    name: demo
   datasource:
     password: 1
-    url: jdbc:postgresql://localhost:5432/lab-Two
+    url: jdbc:postgresql://localhost:5432/waa-labs
     username: postgres
   jpa:
     hibernate:
