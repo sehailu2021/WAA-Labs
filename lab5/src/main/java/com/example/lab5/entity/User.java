@@ -21,7 +21,7 @@ public class User {
     private String password;
     private String email;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
     @ManyToMany()

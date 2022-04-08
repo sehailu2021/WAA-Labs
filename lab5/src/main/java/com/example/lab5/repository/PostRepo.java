@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface  PostRepo extends JpaRepository<Post,Long> {
 
+    @Query("select p.comments from Post p  where p.id =:id")
     List<Comment> getByPostId(long id);
 
     List<Post> findByTitle(String title);

@@ -4,22 +4,22 @@ import com.example.lab5.model.LoginRequest;
 import com.example.lab5.model.LoginResponse;
 import com.example.lab5.model.RefreshTokenRequest;
 import com.example.lab5.service.AuthService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/vi/auth")
 @CrossOrigin
+
 public class AuthController {
-
-    private final AuthService authService;
-
-    public AuthController(AuthService  authService) {
-        this.authService = authService;
-    }
+    @Autowired
+    private  AuthService authService;
 
     @PostMapping
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        System.out.println("Auth Controller");
         var loginResponse = authService.login(loginRequest);
         return ResponseEntity.ok().body(loginResponse);
     }

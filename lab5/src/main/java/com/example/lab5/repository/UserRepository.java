@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByUserName(String username);
+    User findByEmail(String email);
 
     @Query("select p from Post p where p.user.id=:id")
     List<Post> findByUserId(long id);

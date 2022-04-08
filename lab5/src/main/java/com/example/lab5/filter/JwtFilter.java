@@ -1,7 +1,12 @@
 package com.example.lab5.filter;
 
+import com.example.lab5.security.CustomUserDetailService;
 import com.example.lab5.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,15 +22,11 @@ import java.io.IOException;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
+    @Autowired
+    private JwtUtil jwtUtil;
 
-    private final JwtUtil jwtUtil;
-
-    private final UserDetailsService userDetailsService;
-
-    public JwtFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
-        this.jwtUtil= jwtUtil;
-        this.userDetailsService = userDetailsService;
-    }
+    @Autowired
+    private CustomUserDetailService  customUserDetailService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -47,7 +48,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            var userDetails = userDetailsService.loadUserByUsername(userName);
+            var userDetails = customUserDetailService.loadUserByUsername(userName);
             boolean isTokenValid = jwtUtil.validateToken(token);
             if (isTokenValid) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(

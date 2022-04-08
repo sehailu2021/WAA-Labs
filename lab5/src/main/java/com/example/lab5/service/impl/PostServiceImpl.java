@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -25,7 +24,6 @@ public class PostServiceImpl implements PostService {
     PostRepo postRepo;
     @Autowired
     UserRepository userRepo;
-
     @Autowired
     CommentRepo commentRepo;
 
@@ -77,7 +75,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Comment> getByPostId(long id) {
-        return commentRepo.getByPostId(id);
+        return postRepo.getByPostId(id);
     }
 
     @Override

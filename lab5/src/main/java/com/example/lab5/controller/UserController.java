@@ -40,7 +40,7 @@ public class UserController {
         return postService.findByPostTitle(id,title);
     }
 
-    @PostMapping
+    @PostMapping()
     public void save(User u){
         userService.save(u);
     }

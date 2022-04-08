@@ -15,9 +15,9 @@ import java.util.List;
 public class PostController {
     @Autowired
     PostService postService;
+
     @Autowired
     UserService userService;
-
 
     @GetMapping
     public List<PostDto> getPostByUserId(@PathVariable long id){
@@ -50,9 +50,9 @@ public class PostController {
 //        postService.delete(id,pId);
 //    }
 
-    @GetMapping("/{cId}/comments")
-    public List<Comment> getByPostId(@PathVariable long cId){
-        return postService.getByPostId( cId);
+    @GetMapping("{pId}/comments")
+    public List<Comment> getByPostId(@PathVariable long pId){
+        return postService.getByPostId( pId);
 
     }
 
