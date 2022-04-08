@@ -13,8 +13,8 @@ public interface UserRepo extends JpaRepository<User,Long> {
     @Query("select u from User u where u.posts.size >=: n")
      List<User> findByPostSize(int n);
 
-    @Query("select p.user" + " from Post p where p.title =:title")
-    List<User> findByPostTitle(String title);
+    @Query("select p from Post p where p.user.id =:id and p.title=:title")
+    List<User> findByPostTitle(long id, String title);
 
 
 }

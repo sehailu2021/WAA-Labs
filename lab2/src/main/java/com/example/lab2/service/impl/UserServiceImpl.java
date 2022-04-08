@@ -53,8 +53,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> findByPostTitle(String title) {
-        return (List<UserDto>) listMapperUserToUserDto.mapList(userRepo.findByPostTitle(title),new UserDto());
+    public List<UserDto> findByPostTitle(long id,String title) {
+        return (List<UserDto>) listMapperUserToUserDto.mapList(userRepo.findByPostTitle(id,title),new UserDto());
     }
 
 

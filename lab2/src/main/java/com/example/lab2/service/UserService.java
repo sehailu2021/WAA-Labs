@@ -16,7 +16,7 @@ public interface UserService {
 
     List<UserDto> findByPostSize(int n);
 
-    List<UserDto> findByPostTitle(String title);
+    List<UserDto> findByPostTitle(long id,String title);
 
 
 }

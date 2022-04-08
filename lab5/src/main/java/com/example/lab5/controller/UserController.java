@@ -1,8 +1,8 @@
-package com.example.lab2.controller;
-import com.example.lab2.domain.User;
-import com.example.lab2.domain.dto.UserDto;
-import com.example.lab2.service.PostService;
-import com.example.lab2.service.UserService;
+package com.example.lab5.controller;
+import com.example.lab5.entity.User;
+import com.example.lab5.entity.dto.UserDto;
+import com.example.lab5.service.PostService;
+import com.example.lab5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +11,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
+
+  //    @ExecutionTime
+ //    @LogMe
     @Autowired
     UserService userService;
 
     @Autowired
     PostService postService;
-
-  //    @ExecutionTime
- //    @LogMe
    @GetMapping
     public List<UserDto> getAllUser(){return userService.getAll();
     }
@@ -32,12 +32,12 @@ public class UserController {
 
     @GetMapping("/posts/{num}")
     public List<UserDto> getUsers( @PathVariable int num){
-       return userService.findByPostSize(num);
+       return postService.findByPostSize(num);
     }
 
     @GetMapping("/{id}/posts/{title}")
     public List<UserDto> getUsersByPostTitle( @PathVariable(value = "id") long id ,@PathVariable(value = "title") String title){
-        return userService.findByPostTitle(id,title);
+        return postService.findByPostTitle(id,title);
     }
 
     @PostMapping
