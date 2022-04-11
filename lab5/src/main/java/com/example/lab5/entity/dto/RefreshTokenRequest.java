@@ -1,4 +1,4 @@
-package com.example.lab5.model;
+package com.example.lab5.security.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

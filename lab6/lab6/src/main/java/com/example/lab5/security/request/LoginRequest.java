@@ -1,4 +1,4 @@
-package com.example.lab5.model;
+package com.example.lab5.security.request;
 
 import lombok.Builder;
 import lombok.Data;

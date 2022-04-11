@@ -1,7 +1,7 @@
-package com.example.lab5.configuration;
+package com.example.lab5.config;
 
-import com.example.lab5.filter.JwtFilter;
 import com.example.lab5.security.CustomUserDetailService;
+import com.example.lab5.security.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,30 +20,27 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-//@NoArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
-    private  CustomUserDetailService customUserDetailsService;
+    private CustomUserDetailService customUserDetailsService;
     @Autowired
     private   JwtFilter jwtFilter;
 
-    @Override
+    @Override// Authentication
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService);
     }
 
-    @Override
+    @Override// Authorization
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println("Auth Controler");
-
+        System.out.println("Auth Controller");
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/vi/auth").permitAll()
-//                .antMatchers("/api/v1/products").permitAll()
-               .antMatchers("/api/v1/users").hasAuthority("ADMIN")
+                .antMatchers("/api/v1/auth").permitAll()
+                .antMatchers("/api/v1/posts").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/v1/users").hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

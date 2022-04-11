@@ -1,4 +1,4 @@
-package com.example.lab5.model;
+package com.example.lab5.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponse {
-    private String accessToken;
-    private String refreshToken;
+
+public class UserDto {
+
+    private String userName;
+    private String passWord;
 }
