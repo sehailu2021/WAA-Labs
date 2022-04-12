@@ -1,12 +1,10 @@
-package com.example.lab5.security.filter;
+package com.example.lab5.filter;
 
-
-import com.example.lab5.security.CustomUserDetailService;
-import com.example.lab5.security.util.JwtUtil;
+import com.example.lab5.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -19,11 +17,15 @@ import java.io.IOException;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
-    @Autowired
-    private JwtUtil jwtUtil;
 
-    @Autowired
-    private CustomUserDetailService customUserDetailService;
+    private final JwtUtil jwtUtil;
+
+    private final UserDetailsService userDetailsService;
+
+    public JwtFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
+        this.jwtUtil= jwtUtil;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -38,20 +40,14 @@ public class JwtFilter extends OncePerRequestFilter {
             token = authorizationHeader.substring(7);
             try{
                 userName = jwtUtil.getUsernameFromToken(token);
-            }catch (ExpiredJwtException ex){
+            }catch (ExpiredJwtException e){
                 String isRefreshToken = request.getHeader("isRefreshToken");
-                String requestURL = request.getRequestURL().toString();
-                // allow for Refresh Token creation if following conditions are true.
-                if (isRefreshToken != null && isRefreshToken.equals("true") && requestURL.contains("refreshtoken")) {
-                    allowForRefreshToken(ex, request);
-                } else
-                    request.setAttribute("exception", ex);
             }
 
         }
 
         if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            var userDetails = customUserDetailService.loadUserByUsername(userName);
+            var userDetails = userDetailsService.loadUserByUsername(userName);
             boolean isTokenValid = jwtUtil.validateToken(token);
             if (isTokenValid) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
@@ -63,21 +59,4 @@ public class JwtFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-
-    private void allowForRefreshToken(ExpiredJwtException ex, HttpServletRequest request) {
-
-        // create a UsernamePasswordAuthenticationToken with null values.
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                null, null, null);
-        // After setting the Authentication in the context, we specify
-        // that the current user is authenticated. So it passes the
-        // Spring Security Configurations successfully.
-        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-        // Set the claims so that in controller we will be using it to create
-        // new JWT
-        request.setAttribute("claims", ex.getClaims());
-
-    }
-
-
 }

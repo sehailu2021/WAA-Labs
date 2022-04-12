@@ -1,8 +1,8 @@
 package com.example.lab5.service;
 import com.example.lab5.entity.Post;
 import com.example.lab5.entity.User;
-import com.example.lab5.entity.dto.PostDto;
 import com.example.lab5.entity.dto.UserDto;
+import com.example.lab5.entity.dto.PostDto;
 
 import java.util.List;
 

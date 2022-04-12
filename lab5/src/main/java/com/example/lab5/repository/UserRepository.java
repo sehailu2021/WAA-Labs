@@ -1,8 +1,7 @@
 package com.example.lab5.repository;
-
-import com.example.lab5.entity.Post;
 import com.example.lab5.entity.User;
-import com.example.lab5.entity.dto.PostDto;
+import com.example.lab5.entity.Post;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

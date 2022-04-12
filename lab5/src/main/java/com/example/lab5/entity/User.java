@@ -24,7 +24,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
 }

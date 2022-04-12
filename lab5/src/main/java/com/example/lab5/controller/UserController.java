@@ -1,7 +1,5 @@
 package com.example.lab5.controller;
 import com.example.lab5.entity.User;
-import com.example.lab5.entity.dto.UserDto;
-import com.example.lab5.service.PostService;
 import com.example.lab5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +13,7 @@ public class UserController {
   //    @ExecutionTime
  //    @LogMe
     @Autowired
-    UserService userService;
+  UserService userService;
 
     @Autowired
     PostService postService;

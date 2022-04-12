@@ -1,4 +1,4 @@
-package com.example.lab5.entity.dto;
+package com.example.lab5.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

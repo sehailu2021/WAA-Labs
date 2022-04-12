@@ -23,6 +23,7 @@ public class Post {
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @JoinColumn(name="id_post")
     private List<Comment> comments;
 
 }

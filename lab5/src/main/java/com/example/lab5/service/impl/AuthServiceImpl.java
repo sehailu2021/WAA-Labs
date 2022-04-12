@@ -1,10 +1,10 @@
 package com.example.lab5.service.impl;
 
-import com.example.lab5.model.LoginRequest;
-import com.example.lab5.model.LoginResponse;
-import com.example.lab5.model.RefreshTokenRequest;
+import com.example.lab5.entity.dto.LoginRequest;
+import com.example.lab5.entity.dto.LoginResponse;
+import com.example.lab5.entity.dto.RefreshTokenRequest;
 import com.example.lab5.service.AuthService;
-import com.example.lab5.util.JwtUtil;
+import com.example.lab5.security.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,9 +47,16 @@ public class AuthServiceImpl implements AuthService {
     public LoginResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
         boolean isRefreshTokenValid = jwtUtil.validateToken(refreshTokenRequest.getRefreshToken());
         if (isRefreshTokenValid) {
-            final String accessToken = jwtUtil.generateToken(jwtUtil.getSubject(refreshTokenRequest.getRefreshToken()));
-            var loginResponse = new LoginResponse(accessToken, refreshTokenRequest.getRefreshToken());
-            return loginResponse;
+            var isAccessTokenExpired = jwtUtil.isTokenExpired(refreshTokenRequest.getAccessToken());
+            if(isAccessTokenExpired) {
+                final String accessToken = jwtUtil.generateToken(jwtUtil.getSubject(refreshTokenRequest.getRefreshToken()));
+                var loginResponse = new LoginResponse(accessToken, refreshTokenRequest.getRefreshToken());
+                return loginResponse;
+            }
+
+//            final String accessToken = jwtUtil.generateToken(jwtUtil.getSubject(refreshTokenRequest.getRefreshToken()));
+//            var loginResponse = new LoginResponse(accessToken, refreshTokenRequest.getRefreshToken());
+//            return loginResponse;
         }
         return new LoginResponse();
     }

@@ -1,4 +1,4 @@
-package com.example.lab5.security.model;
+package com.example.lab5.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RefreshTokenRequest {
     private String refreshToken;
+    private String accessToken;
+
 }

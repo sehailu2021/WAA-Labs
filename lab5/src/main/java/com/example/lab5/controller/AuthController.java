@@ -1,16 +1,15 @@
 package com.example.lab5.controller;
 
-import com.example.lab5.model.LoginRequest;
-import com.example.lab5.model.LoginResponse;
-import com.example.lab5.model.RefreshTokenRequest;
+import com.example.lab5.entity.dto.LoginRequest;
+import com.example.lab5.entity.dto.LoginResponse;
+import com.example.lab5.entity.dto.RefreshTokenRequest;
 import com.example.lab5.service.AuthService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/vi/auth")
+@RequestMapping("/api/v1/auth")
 @CrossOrigin
 
 public class AuthController {

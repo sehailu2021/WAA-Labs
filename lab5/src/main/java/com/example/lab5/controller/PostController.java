@@ -1,9 +1,7 @@
 package com.example.lab5.controller;
 import com.example.lab5.entity.Comment;
 import com.example.lab5.entity.Post;
-import com.example.lab5.entity.dto.PostDto;
-import com.example.lab5.service.PostService;
-import com.example.lab5.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
