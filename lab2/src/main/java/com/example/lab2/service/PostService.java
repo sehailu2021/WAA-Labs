@@ -10,11 +10,16 @@ public interface PostService {
 
     PostDto findById(long id);
 
-    void save(long id, Post p);
+    void saveByUserId(long id, Post p);
 
-    void delete(long id, long Pid);
+    void save(Post post);
 
-    void update(long id, Post p);
+//  void deleteByUserId(long id, long Pid);
+    void delete(long id);
+
+    void update(long id,  Post p);
+
+    List<PostDto> findAll();
 
 
     List<PostDto> findByTitle(String title);

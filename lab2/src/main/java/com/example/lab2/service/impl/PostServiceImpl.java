@@ -50,21 +50,32 @@ public class PostServiceImpl implements PostService {
         return modelMapper.map(postRepo.getById(id),PostDto.class);
     }
 
+    @Override
+    public void save(Post post) {
+        postRepo.save(post);
+
+    }
 
     @Override
-    public void save(long id, Post p) {
+    public void delete(long id) {
+        postRepo.deleteById(id);
+    }
+
+
+    @Override
+    public void saveByUserId(long id, Post p) {
         var user =userRepo.getById(id);
         user.getPosts().add(p);
         postRepo.save(p);
     }
 
-    @Override
-    public void delete(long id, long pId) {
-       var user = userRepo.getById(id);
-       var post = postRepo.getById(pId);
-       user.getPosts().remove(post);
-
-    }
+//    @Override
+//    public void delete(long id, long pId) {
+//       var user = userRepo.getById(id);
+//       var post = postRepo.getById(pId);
+//       user.getPosts().remove(post);
+//
+//    }
 
     @Override
     public void update(long id, Post p) {
@@ -74,6 +85,11 @@ public class PostServiceImpl implements PostService {
         post.setContent(p.getContent());
 
 
+    }
+
+    @Override
+    public List<PostDto> findAll() {
+        return (List<PostDto>) listMapperPostToPostDto.mapList(postRepo.findAll(),new PostDto());
     }
 
 }

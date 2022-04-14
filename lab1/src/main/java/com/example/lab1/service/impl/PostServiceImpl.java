@@ -2,6 +2,7 @@ package com.example.lab1.service.impl;
 
 import com.example.lab1.domain.Post;
 import com.example.lab1.domain.dto.PostDto;
+import com.example.lab1.helper.ListMapper;
 import com.example.lab1.repo.PostRepo;
 import com.example.lab1.service.PostService;
 import org.modelmapper.ModelMapper;
@@ -15,11 +16,15 @@ public class PostServiceImpl implements PostService{
     @Autowired
     ModelMapper modelMapper;
 
+
+    ListMapper postToPostDtoMapper;
+
     @Autowired
     PostRepo postRepo;
+
     @Override
     public List<PostDto> findAll() {
-        return (List<PostDto>) modelMapper.map(postRepo.findAll(),PostDto.class);
+        return (List<PostDto>) postToPostDtoMapper.mapList(postRepo.findAll(), new PostDto());
     }
 
     @Override

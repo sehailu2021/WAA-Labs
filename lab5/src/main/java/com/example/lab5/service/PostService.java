@@ -15,15 +15,11 @@ public interface PostService {
 
     void update(long id, Post p);
 
+    List<PostDto> findAll();
 
     List<PostDto> findByTitle(String title);
 
-    List<UserDto> findByPostSize(int n);
-
-    List<UserDto> findByPostTitle(long id,String title);
-
-
-    void addComment(long id, Comment c);
+        void addComment(long id, Comment c);
 
     List<Comment> getByPostId(long id);
 

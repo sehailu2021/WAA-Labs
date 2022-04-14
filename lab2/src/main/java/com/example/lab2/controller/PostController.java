@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users/{id}/posts")
+@CrossOrigin("http://localhost:3000")
+@RequestMapping("/api/v1/posts")
 public class PostController {
     @Autowired
      PostService postService;
@@ -24,13 +25,24 @@ public class PostController {
 
 
     @GetMapping
-    public List<PostDto> getPostByUserId(@PathVariable long id){
-        return postService.findByUserId(id);
+    public  List<PostDto> getAll(){
+        return postService.findAll();
     }
-    @GetMapping("/{pId}")
-    public PostDto getPostById(@PathVariable long id, @PathVariable long pId){
-        return postService.findByUserIdAndPostId(id,pId);
+
+    @GetMapping("/{id}")
+    public  PostDto getById(@PathVariable long id){
+        return postService.findById(id);
     }
+
+
+//    @GetMapping
+//    public List<PostDto> getPostByUserId(@PathVariable long id){
+//        return postService.findByUserId(id);
+//    }
+//    @GetMapping("/{pId}")
+//    public PostDto getPostById(@PathVariable long id, @PathVariable long pId){
+//        return postService.findByUserIdAndPostId(id,pId);
+//    }
 
 
 //    @GetMapping("/{title}")
@@ -40,23 +52,29 @@ public class PostController {
 //    }
 
     @PostMapping
-    public void savePost( long id,@RequestBody Post post){
-        postService.save(id,post);
+    public void savePost( @RequestBody Post post){
+        postService.save(post);
     }
 
     @PutMapping("/{pId}")
     public void updatePost(@PathVariable long pId, @RequestBody Post post){
         postService.update(pId,post);
     }
+//
+//    @DeleteMapping("/{pId}")
+//    public void deletePost(@PathVariable long id, @PathVariable long pId){
+//        postService.delete(id,pId);
+//    }
 
-    @DeleteMapping("/{pId}")
-    public void deletePost(@PathVariable long id, @PathVariable long pId){
-        postService.delete(id,pId);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable long id){
+        postService.delete(id);
+
     }
 
-    @GetMapping("/{cId}/comments")
-    public List<Comment> getByPostId(@PathVariable long cId){
-        return commentService.getByPostId( cId);
+    @GetMapping("/{id}/comments")
+    public List<Comment> getByPostId(@PathVariable long id){
+        return commentService.getByPostId( id);
 
     }
 

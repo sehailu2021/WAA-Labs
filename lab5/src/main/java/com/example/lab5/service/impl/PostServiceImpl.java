@@ -1,11 +1,7 @@
 package com.example.lab5.service.impl;
-
-
 import com.example.lab5.entity.Comment;
 import com.example.lab5.entity.Post;
-import com.example.lab5.entity.User;
 import com.example.lab5.entity.dto.PostDto;
-import com.example.lab5.entity.dto.UserDto;
 import com.example.lab5.helper.ListMapper;
 import com.example.lab5.repository.CommentRepo;
 import com.example.lab5.repository.PostRepo;
@@ -29,8 +25,8 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     ModelMapper modelMapper;
-    @Autowired
-    ListMapper<User, UserDto> listMapperUserToUserDto;
+//    @Autowired
+//    ListMapper<User, UserDto> listMapperUserToUserDto;
     @Autowired
     ListMapper<Post, PostDto> listMapperPostToPostDto;
 
@@ -52,19 +48,16 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<PostDto> findAll() {
+        return (List<PostDto>) listMapperPostToPostDto.mapList(postRepo.findAll(),new PostDto());
+    }
+
+    @Override
     public List<PostDto> findByTitle(String title) {
         return (List<PostDto>) listMapperPostToPostDto.mapList(postRepo.findByTitle(title),new PostDto());
     }
 
-    @Override
-    public List<UserDto> findByPostSize(int n) {
-        return (List<UserDto>) listMapperUserToUserDto.mapList(postRepo.findByPostSize(n), new UserDto());
-    }
 
-    @Override
-    public List<UserDto> findByPostTitle(long id, String title) {
-        return (List<UserDto>) listMapperUserToUserDto.mapList(postRepo.findByPostTitle(id, title),new UserDto());
-    }
 
     @Override
     public void addComment(long id, Comment c) {

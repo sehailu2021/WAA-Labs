@@ -58,6 +58,17 @@ public class UserServiceImpl implements UserService {
         return (List<UserDto>) listMapperUserToUserDto.mapList(userRepo.findAll(),new UserDto());
     }
 
+
+    @Override
+    public List<UserDto> findByPostSize(int n) {
+        return (List<UserDto>) listMapperUserToUserDto.mapList(postRepo.findByPostSize(n), new UserDto());
+    }
+
+    @Override
+    public List<UserDto> findByPostTitle(long id, String title) {
+        return (List<UserDto>) listMapperUserToUserDto.mapList(postRepo.findByPostTitle(id, title),new UserDto());
+    }
+
     @Override
     public List<PostDto> findByUserId(long id) {
         var user = userRepo.getById(id);

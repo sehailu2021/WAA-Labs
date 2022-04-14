@@ -1,6 +1,7 @@
 package com.example.lab1.controller;
 
 import com.example.lab1.domain.Post;
+import com.example.lab1.domain.dto.PostDto;
 import com.example.lab1.service.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +19,12 @@ public class PostController {
    }
 
    @GetMapping
-   public List<Post> findAllProduct(){
+   public List<PostDto> findAllProduct(){
        return postService.findAll();
 
     }
    @GetMapping("/{id}")
-    public ResponseEntity<Post> findProductById(@PathVariable long id){
+    public ResponseEntity<PostDto> findProductById(@PathVariable long id){
        var post = postService.findById(id) ;
        return ResponseEntity.ok(post);
     }

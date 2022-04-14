@@ -2,6 +2,8 @@ package com.example.lab5.controller;
 import com.example.lab5.entity.Comment;
 import com.example.lab5.entity.Post;
 
+import com.example.lab5.entity.dto.PostDto;
+import com.example.lab5.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,24 +16,16 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @Autowired
-    UserService userService;
-
     @GetMapping
-    public List<PostDto> getPostByUserId(@PathVariable long id){
-        return userService.findByUserId(id);
-    }
-    @GetMapping("/{pId}")
-    public Post getPostById(@PathVariable long id, @PathVariable long pId){
-        return userService.findByUserIdAndPostId(id,pId);
+    public List<PostDto> findAll(){
+        return postService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public  PostDto findById(@PathVariable long id){
+        return  postService.findById(id);
 
-//    @GetMapping("/{title}")
-//    public List<PostDto> findByTitle(@PathVariable String title){
-//        return postService.findByTitle(title);
-//
-//    }
+    }
 
     @PostMapping
     public void savePost( long id,@RequestBody Post post){
@@ -43,10 +37,6 @@ public class PostController {
         postService.update(pId,post);
     }
 
-//    @DeleteMapping("/{pId}")
-//    public void deletePost(@PathVariable long id, @PathVariable long pId){
-//        postService.delete(id,pId);
-//    }
 
     @GetMapping("{pId}/comments")
     public List<Comment> getByPostId(@PathVariable long pId){

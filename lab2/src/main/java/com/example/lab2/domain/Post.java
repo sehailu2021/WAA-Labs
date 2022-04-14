@@ -1,5 +1,6 @@
 package com.example.lab2.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,8 @@ public class Post {
     private User user;
 
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post",   cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> comments;
 
 }
