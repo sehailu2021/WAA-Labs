@@ -35,7 +35,6 @@ const Posts= (props) => {
             setSelected = { ()=>{props.setSelected(post.id)}}
         />
     });
-
     return postList;
 }
 
