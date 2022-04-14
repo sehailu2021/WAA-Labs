@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = (props)=>{
 
- 
-
+    const navigate = useNavigate();
     const newPostForm = useRef();
 
     const addButtonClicked = ()=>{
@@ -16,7 +16,7 @@ const AddPost = (props)=>{
         }
         axios.post('http://localhost:8080/api/v1/posts', data)
         .then(response =>{
-            props.changeFetchFlag();
+           navigate("/posts") ;
         })
         .catch()
     }
