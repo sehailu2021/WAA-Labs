@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
     <div className="App">
-        <h1 className='h'> Waa Lab-8</h1>
+        <h1 className='h'> Waa Lab-10</h1>
         <Dashboard />
       
     </div>
